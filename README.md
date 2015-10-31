@@ -8,6 +8,6 @@ Invented by Stephen Few, "Bandlines use horizontal bands of color in the backgro
 
 The example tser sampler generates a lot of outliers on purpose - to make them appear regularly, and to illustrate how outliers effect the bands.
 
-[Source code](https://github.com/monfera/sf-student-dashboard/tree/bandline)
+[Source code](https://github.com/monfera/bandlines)
 
 [License](https://opensource.org/licenses/BSD-3-Clause)
