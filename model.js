@@ -1,7 +1,12 @@
 function setupBandline(tsers) {
 
     var allValuesSorted = [].concat.apply([], tsers.map(value)).sort(d3.ascending)
-    var bandThresholds = [d3.min(allValuesSorted), d3.quantile(allValuesSorted, 0.25), d3.quantile(allValuesSorted, 0.75), d3.max(allValuesSorted)]
+    var bandThresholds = [
+        d3.min(allValuesSorted),
+        d3.quantile(allValuesSorted, 0.25),
+        d3.quantile(allValuesSorted, 0.75),
+        d3.max(allValuesSorted)
+    ]
 
     var outlierClassifications = ['lowOutlier', 'normal', 'highOutlier']
 
@@ -19,18 +24,21 @@ function setupBandline(tsers) {
 
     function medianLineBand(sortedValues) {
         // The median line is approximated as a band of 0 extent (CSS styling is via 'stroke').
-        // This 'band' is to be tacked on last so it isn't occluded by other bands (SVG uses the painter's algo for Z)
+        // This 'band' is to be tacked on last so it isn't occluded by other bands
+        // (SVG uses the painter's algorithm for Z ordering).
         var median = d3.median(sortedValues)
         return [median, median]
     }
 
-    // Setting up the bandLine with the domain dependent values only (FP curry style applied on 'functional objects')
-    // This helps decouple the Model and the viewModel (MVC-like principle)
+    var bandlineXDomain = [0, d3.max(tsers.map(compose(property('length'), property('value')))) - 1]
+
+    // Setting up the bandLine with the domain dependent values only (FP curry style applied on
+    // 'functional objects'). This helps decouple the Model and the viewModel (MVC-like principle).
     return bandLine()
         .bands(window2(bandThresholds).concat([medianLineBand(allValuesSorted)]))
         .valueAccessor(property('value'))
         .pointStyleAccessor(makeOutlierScale(allValuesSorted))
-        .xScaleOfBandLine(d3.scale.linear().domain([0, d3.max(tsers.map(compose(property('length'), property('value')))) - 1]))
+        .xScaleOfBandLine(d3.scale.linear().domain(bandlineXDomain))
         .xScaleOfSparkStrip(d3.scale.linear().domain(d3.extent(bandThresholds)))
         .rScaleOfBandLine(d3.scale.ordinal().domain(outlierClassifications))
 }

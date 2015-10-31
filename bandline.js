@@ -30,7 +30,9 @@ function renderBands(root, bands, yScaler, xRanger, yRanger) {
 }
 
 function pointData(valueAccessor, d) {
-    return valueAccessor(d).map(function(value, i) {return {key: i, value: value, dd: d}}).filter(compose(defined, value))
+    return valueAccessor(d)
+        .map(function(value, i) {return {key: i, value: value, dd: d}})
+        .filter(compose(defined, value))
 }
 
 function renderPoints(root, valueAccessor, pointStyleAccessor, rScale, xSpec, ySpec) {
@@ -75,19 +77,17 @@ function bandLine() {
     function renderBandLine(root) {
 
         var bandLine = bind(root, 'bandLine')
-        renderBands(bandLine, _bands, _yScalerOfBandLine, constant(_xScaleOfBandLine.range()), function (d) {
-            return d.value.map(d.yScale)
-        })
+        renderBands(bandLine, _bands, _yScalerOfBandLine, constant(_xScaleOfBandLine.range()),
+            function(d) {return d.value.map(d.yScale)})
         renderValueLine(bandLine, _valueAccessor, _xScaleOfBandLine, _yScalerOfBandLine)
-        renderPoints(bandLine, _valueAccessor, _pointStyleAccessor, _rScaleOfBandLine, compose(_xScaleOfBandLine, key), function (d) {
-            return _yScalerOfBandLine(d.dd)(d.value)
-        })
+        renderPoints(bandLine, _valueAccessor, _pointStyleAccessor, _rScaleOfBandLine,
+            compose(_xScaleOfBandLine, key), function(d) {return _yScalerOfBandLine(d.dd)(d.value)})
     }
 
     function renderSparkStrip(root) {
 
         var sparkStrip = bind(root, 'sparkStrip')
-        renderBands(sparkStrip, _bands, _yScalerOfSparkStrip, function (d) {
+        renderBands(sparkStrip, _bands, _yScalerOfSparkStrip, function(d) {
             return d.value.map(_xScaleOfSparkStrip)
         }, constant(_yRange))
         renderExtent(sparkStrip, _valueAccessor, _xScaleOfSparkStrip, _yRange)
@@ -95,7 +95,7 @@ function bandLine() {
     }
 
     function yScalerOfBandLineCalc() {
-        return function (d) {
+        return function(d) {
             return d3.scale.linear().domain(valuesExtent(_valueAccessor, d)).range(_yRange).clamp(true)
         }
     }

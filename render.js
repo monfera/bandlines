@@ -6,7 +6,7 @@ function sampleAndRender() {
 function render(curriedBandLine, tsers) {
 
     var margin = {top: 5, right: 40, bottom: 20, left: 120}
-    var width = 960 - margin.left - margin.right
+    var width = 370 - margin.left - margin.right
     var height = 370 - margin.top - margin.bottom
 
     var rowPitch = 40
@@ -53,7 +53,7 @@ function render(curriedBandLine, tsers) {
         .entered
         .text(key)
         .attr('transform', translate(function(d, i) {
-            return [0, nameColumnWidth + columnSeparation, nameColumnWidth + columnSeparation + bandLineWidth + columnSeparation][i]
+            return [0, nameColumnWidth, nameColumnWidth + bandLineWidth + 3 * columnSeparation][i]
         }, rowPitch))
 
 
@@ -74,6 +74,6 @@ function render(curriedBandLine, tsers) {
         .call(bandLine.renderBandLine)
 
     bind(row, 'assignmentScoresVerticalCell')
-        .attr('transform', translateX(nameColumnWidth + columnSeparation + bandLineWidth + columnSeparation))
+        .attr('transform', translateX(nameColumnWidth + bandLineWidth + 2 * columnSeparation))
         .call(bandLine.renderSparkStrip)
 }

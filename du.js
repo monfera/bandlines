@@ -6,7 +6,7 @@ function constant(value) {
 
 function compose(fun1, fun2) {
     if(arguments.length === 2) {
-        return function (/*args*/) {
+        return function(/*args*/) {
             return fun1(fun2.apply(null, arguments))
         }
     } else {
@@ -45,7 +45,8 @@ function window2(a) {
 
 function bind0(rootSelection, cssClass, element, dataFlow) {
     element = element || 'g' // fixme switch from variadic to curried
-    dataFlow = typeof dataFlow === 'function' ? dataFlow : (dataFlow === void(0) ? function(d) {return [d]} : constant(dataFlow))
+    dataFlow = typeof dataFlow === 'function' ? dataFlow
+        : (dataFlow === void(0) ? function(d) {return [d]} : constant(dataFlow))
     var binding = rootSelection.selectAll('.' + cssClass).data(dataFlow, key)
 
     binding.entered = binding.enter().append(element)
@@ -61,19 +62,20 @@ function bind(object, key) {
 }
 
 function translate(funX, funY) {
-    return function (d, i) {
-        return 'translate(' + (typeof funX === 'function' ? funX(d, i) : funX) + ',' + (typeof funY === 'function' ? funY(d, i) : funY) + ')'
+    return function(d, i) {
+        return 'translate(' + (typeof funX === 'function' ? funX(d, i) : funX) + ','
+            + (typeof funY === 'function' ? funY(d, i) : funY) + ')'
     }
 }
 
 function translateX(funX) {
-    return function (d, i) {
+    return function(d, i) {
         return 'translate(' + (typeof funX === 'function' ? funX(d, i) : funX) + ', 0)'
     }
 }
 
 function translateY(funY) {
-    return function (d, i) {
+    return function(d, i) {
         return 'translate(0, ' + (typeof funY === 'function' ? funY(d, i) : funY) + ')'
     }
 }
