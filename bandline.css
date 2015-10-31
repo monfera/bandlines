@@ -1,11 +1,5 @@
 /**
  *  Bandline styling
- *
- * Implementation of Stephen Few's bandlines
- *
- * Copyright Robert Monfera
- * Design: Stephen Few
- * Design documentation: https://www.perceptualedge.com/articles/visual_business_intelligence/introducing_bandlines.pdf
  */
 
 g.bandLine .band,

@@ -1,9 +1,3 @@
-/**
- * D3 utilities
- *
- * Copyright Robert Monfera
- */
-
 function constant(value) {
     return function() {
         return value
