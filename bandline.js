@@ -91,12 +91,16 @@ function bandLine() {
             return d.value.map(_xScaleOfSparkStrip)
         }, constant(_yRange))
         renderExtent(sparkStrip, _valueAccessor, _xScaleOfSparkStrip, _yRange)
-        renderPoints(sparkStrip, _valueAccessor, _pointStyleAccessor,  _rScaleOfSparkStrip, compose(_xScaleOfSparkStrip, value), _yScalerOfSparkStrip())
+        renderPoints(sparkStrip, _valueAccessor, _pointStyleAccessor,  _rScaleOfSparkStrip,
+                     compose(_xScaleOfSparkStrip, value), _yScalerOfSparkStrip())
     }
 
     function yScalerOfBandLineCalc() {
         return function(d) {
-            return d3.scale.linear().domain(valuesExtent(_valueAccessor, d)).range(_yRange).clamp(true)
+            return d3.scale.linear()
+                .domain(valuesExtent(_valueAccessor, d))
+                .range(_yRange)
+                .clamp(true)
         }
     }
 

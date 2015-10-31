@@ -30,7 +30,7 @@ function setupBandline(tsers) {
         return [median, median]
     }
 
-    var bandlineXDomain = [0, d3.max(tsers.map(compose(property('length'), property('value')))) - 1]
+    var temporalDomain = [0, d3.max(tsers.map(compose(property('length'), property('value')))) - 1]
 
     // Setting up the bandLine with the domain dependent values only (FP curry style applied on
     // 'functional objects'). This helps decouple the Model and the viewModel (MVC-like principle).
@@ -38,7 +38,7 @@ function setupBandline(tsers) {
         .bands(window2(bandThresholds).concat([medianLineBand(allValuesSorted)]))
         .valueAccessor(property('value'))
         .pointStyleAccessor(makeOutlierScale(allValuesSorted))
-        .xScaleOfBandLine(d3.scale.linear().domain(bandlineXDomain))
+        .xScaleOfBandLine(d3.scale.linear().domain(temporalDomain))
         .xScaleOfSparkStrip(d3.scale.linear().domain(d3.extent(bandThresholds)))
         .rScaleOfBandLine(d3.scale.ordinal().domain(outlierClassifications))
 }
