@@ -108,7 +108,7 @@ function bandLine() {
     var bands = function(spec) {
         if(spec !== void(0)) {
             _bands = spec
-            return obj
+            return functionalObject
         } else {
             return bands
         }
@@ -119,7 +119,7 @@ function bandLine() {
         if(spec !== void(0)) {
             _valueAccessor = spec
             _yScalerOfBandLine = yScalerOfBandLineCalc()
-            return obj
+            return functionalObject
         } else {
             return _valueAccessor
         }
@@ -129,7 +129,7 @@ function bandLine() {
     var xScaleOfBandLine = function(spec) {
         if(spec !== void(0)) {
             _xScaleOfBandLine = spec
-            return obj
+            return functionalObject
         } else {
             return _xScaleOfBandLine
         }
@@ -139,7 +139,7 @@ function bandLine() {
     var xScaleOfSparkStrip = function(spec) {
         if(spec !== void(0)) {
             _xScaleOfSparkStrip = spec
-            return obj
+            return functionalObject
         } else {
             return _xScaleOfSparkStrip
         }
@@ -149,7 +149,7 @@ function bandLine() {
     var rScaleOfBandLine = function(spec) {
         if(spec !== void(0)) {
             _rScaleOfBandLine = spec
-            return obj
+            return functionalObject
         } else {
             return _rScaleOfBandLine
         }
@@ -159,7 +159,7 @@ function bandLine() {
     var rScaleOfSparkStrip = function(spec) {
         if(spec !== void(0)) {
             _rScaleOfSparkStrip = spec
-            return obj
+            return functionalObject
         } else {
             return _rScaleOfSparkStrip
         }
@@ -173,7 +173,7 @@ function bandLine() {
             _yRange = spec
             _yScalerOfSparkStrip = constant(d3.mean(_yRange))
             _yScalerOfBandLine = yScalerOfBandLineCalc()
-            return obj
+            return functionalObject
         } else {
             return _yRange
         }
@@ -183,13 +183,14 @@ function bandLine() {
     var pointStyleAccessor = function(spec) {
         if(spec !== void(0)) {
             _pointStyleAccessor = spec
-            return obj
+            return functionalObject
         } else {
             return _pointStyleAccessor
         }
     }
 
-    var obj = {
+    var functionalObject = {
+        // For reference: http://bost.ocks.org/mike/chart/
         renderBandLine: renderBandLine,
         renderSparkStrip: renderSparkStrip,
         bands: bands,
@@ -202,5 +203,5 @@ function bandLine() {
         pointStyleAccessor: pointStyleAccessor
     }
 
-    return obj
+    return functionalObject
 }
